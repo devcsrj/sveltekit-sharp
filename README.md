@@ -1,38 +1,41 @@
-# create-svelte
+# Steps
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Run the following:
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
+```shell
+npm install
 npm run build
+cd build
+node .
 ```
 
-You can preview the production build with `npm run preview`.
+Then, go to:
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```
+http://localhost:3000/api/demo.png
+```
+
+The above will fail with:
+
+```
+Error: Could not load the "sharp" module using the darwin-arm64 runtime
+undefined: Could not dynamically require "../src/build/Release/sharp-darwin-arm64.node". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.
+undefined: Could not dynamically require "../src/build/Release/sharp-wasm32.node". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.
+undefined: Could not dynamically require "@img/sharp-darwin-arm64/sharp.node". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.
+undefined: Could not dynamically require "@img/sharp-wasm32/sharp.node". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.
+Possible solutions:
+- Ensure optional dependencies can be installed:
+    npm install --include=optional sharp
+    yarn add sharp --ignore-engines
+- Ensure your package manager supports multi-platform installation:
+    See https://sharp.pixelplumbing.com/install#cross-platform
+- Add platform-specific dependencies:
+    npm install --os=darwin --cpu=arm64 sharp
+- Consult the installation documentation:
+    See https://sharp.pixelplumbing.com/install
+    at requireSharp (file:///Users/devcsrj/Projects/devcsrj/sveltekit-sharp/build/server/chunks/_server.ts-XFgYmyCb.js:3501:10)
+```
+
+On dev mode however, it works fine with:
+
+![](./static/expected.png)
